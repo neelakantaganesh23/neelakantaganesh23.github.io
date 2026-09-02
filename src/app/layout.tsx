@@ -23,7 +23,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ganeshneelakanta.vercel.app"),
+  metadataBase: new URL("https://neelakantaganesh23.github.io"),
   title: {
     default: `${profile.name} — AI Engineer`,
     template: `%s · ${profile.name}`,
