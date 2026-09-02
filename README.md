@@ -52,8 +52,8 @@ Theme choice persists in `localStorage` and is applied by a blocking script in
    Paste real quotes into `recommendations`, flip `showRecommendations` to `true`,
    and the section swaps over. No quotes were written for you.
 4. **Blog / notes** — not built; no content was supplied.
-5. **`metadataBase`** in `src/app/layout.tsx` — set it to your real domain so Open
-   Graph URLs resolve correctly.
+5. **`metadataBase`** in `src/app/layout.tsx` already points at the live Pages
+   URL. Only change it if you move to a custom domain.
 
 ## Live site
 
