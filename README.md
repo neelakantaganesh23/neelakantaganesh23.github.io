@@ -55,16 +55,41 @@ Theme choice persists in `localStorage` and is applied by a blocking script in
 5. **`metadataBase`** in `src/app/layout.tsx` — set it to your real domain so Open
    Graph URLs resolve correctly.
 
-## Deploying to Vercel
+## Live site
 
-Zero config — Vercel detects Next.js automatically.
+**https://neelakantaganesh23.github.io**
+
+Hosted on GitHub Pages from this repo — free with no expiry, HTTPS enforced.
+
+### How to update it
+
+Push to `main`. That is the whole workflow.
 
 ```bash
-npx vercel
+git add -A && git commit -m "update copy" && git push
 ```
 
-Or push to GitHub and import the repo at vercel.com/new. No environment variables
-are needed; the site is fully static (both routes prerender).
+The `Deploy to GitHub Pages` workflow builds the static export and publishes
+it, usually within about a minute. Check a run with `gh run list` or
+`gh run watch`.
+
+### Why a static export
+
+`next.config.ts` sets `output: "export"`, so the whole site prerenders to
+`out/` and needs no server. Two consequences worth knowing:
+
+- `images.unoptimized` is on — Pages has no image optimizer, so `next/image`
+  emits the original files. Keep screenshots reasonably sized.
+- `trailingSlash` is on, because Pages serves `/route/` as `/route/index.html`.
+
+If you ever move to a host with a Next.js runtime (Vercel, etc.), delete those
+three options and image optimization comes back automatically.
+
+### Custom domain
+
+Buy a domain, then add a `public/CNAME` file containing just the hostname and
+point the domain's DNS at GitHub Pages. Also update `metadataBase` in
+`src/app/layout.tsx` so Open Graph URLs follow.
 
 ## Accessibility & responsiveness notes
 
