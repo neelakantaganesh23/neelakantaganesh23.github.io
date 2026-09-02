@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — warm "Claude" palette: ivory paper, clay accent, ink text.
+   Semantic vars flip on [data-theme="dark"]; @theme inline maps them to
+   Tailwind utilities (bg-canvas, text-ink, border-line, text-clay, ...).
+--------------------------------------------------------------------------- */
+
+:root {
+  --canvas: #faf9f5;
+  --canvas-alt: #f0eee6;
+  --surface: #ffffff;
+  --surface-sunk: #f5f4ee;
+  --line: #e3e0d6;
+  --line-strong: #d3cfc2;
+
+  --ink: #191917;
+  --ink-muted: #6b6a63;
+  --ink-subtle: #97958c;
+
+  --clay: #c96442;
+  --clay-ink: #ab4f31;
+  --clay-soft: #f2e4dd;
+
+  --shadow-card: 0 1px 2px rgba(25, 25, 23, 0.04), 0 8px 24px -12px rgba(25, 25, 23, 0.12);
+  --shadow-lift: 0 2px 4px rgba(25, 25, 23, 0.05), 0 18px 40px -16px rgba(25, 25, 23, 0.2);
+}
+
+[data-theme="dark"] {
+  --canvas: #1f1e1d;
+  --canvas-alt: #262624;
+  --surface: #2b2a28;
+  --surface-sunk: #232220;
+  --line: #3b3a37;
+  --line-strong: #4d4c47;
+
+  --ink: #f5f4ee;
+  --ink-muted: #a8a69d;
+  --ink-subtle: #7d7b73;
+
+  --clay: #d97757;
+  --clay-ink: #e79b7f;
+  --clay-soft: #40302a;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 18px 40px -16px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-canvas-alt: var(--canvas-alt);
+  --color-surface: var(--surface);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+
+  --color-clay: var(--clay);
+  --color-clay-ink: var(--clay-ink);
+  --color-clay-soft: var(--clay-soft);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* clears the sticky pill nav when jumping to a section */
+    scroll-padding-top: 7rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--clay-soft);
+    color: var(--clay-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  /* faint graph-paper texture, echoing a notebook page */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Motion is opt-in: everything animated degrades to a static, legible state. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
